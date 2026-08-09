@@ -31,15 +31,14 @@ const DECK = [
 
 const TILES = [
   { type:"audio",       label:"Audio Overview", icon:"i-audio",   tint:"#2C2A3E" },
-  { type:"slides",      label:"Slide Deck",     icon:"i-slides",  tint:"#26282B" },
+  { type:"slides",      label:"Slide Deck",     icon:"i-slides",  tint:"#33301F" },
   { type:"video",       label:"Video Overview", icon:"i-video",   tint:"#223033" },
   { type:"mindmap",     label:"Mind Map",       icon:"i-mindmap", tint:"#33262B" },
-  { type:"flashcards",  label:"Flashcards",     icon:"i-cards",   tint:"#1F3760", hero:true,
-    sub:"Create flashcards from your sources" },
+  { type:"flashcards",  label:"Flashcards",     icon:"i-cards",   tint:"#1F3760", hero:true },
   { type:"reports",     label:"Reports",        icon:"i-report",  tint:"#33301F" },
   { type:"quiz",        label:"Quiz",           icon:"i-quiz",    tint:"#212A33" },
   { type:"infographic", label:"Infographic",    icon:"i-chart",   tint:"#33252F" },
-  { type:"table",       label:"Data Table",     icon:"i-table",   tint:"#26292C" }
+  { type:"table",       label:"Data Table",     icon:"i-table",   tint:"#2C2A3E" }
 ];
 
 const ACTIONS = [
@@ -193,7 +192,7 @@ function renderFlow() {
   if (f === "scope") {
     const err = state.errorKey === "scope";
     return `
-      <div class="gcard ${err ? "err" : ""}">
+      <div class="gcard ${err ? "err" : "accent"}">
         <h3>Which flashcards should be improved?</h3>
         <p>Choose the scope first. Nothing changes until you apply the update.</p>
         <div class="opts">
@@ -221,7 +220,7 @@ function renderFlow() {
         <span class="num">${i + 1}</span><span>${esc(c.q)}</span>
       </button>`).join("");
     return `
-      <div class="gcard ${err ? "err" : ""}">
+      <div class="gcard ${err ? "err" : "accent"}">
         <div class="picker-head">
           <h3 style="margin:0">Select flashcards to improve</h3>
           <span class="n ${n ? "on" : ""}">${n === 12 ? "All 12 selected" : `${n} selected`}</span>
@@ -246,7 +245,7 @@ function renderFlow() {
       ? "Which concept should the cards focus on? For example: REM sleep"
       : "Describe the change in your own words";
     return `
-      <div class="gcard ${err ? "err" : ""}">
+      <div class="gcard ${err ? "err" : "accent"}">
         <div class="scope-tag">${icon("i-cards", "ic-sm")} ${esc(scopeText())}</div>
         <p style="margin-bottom:10px">Choose a suggested improvement</p>
         <div class="chips">${chips}</div>
@@ -265,7 +264,7 @@ function renderFlow() {
       ? "Every card in the set is being revised."
       : `${12 - state.picked.size} cards you did not select will stay exactly as they are.`;
     return `
-      <div class="gcard">
+      <div class="gcard accent">
         <div class="scope-tag">${icon("i-refresh", "ic-sm")} ${esc(scopeText())}</div>
         <h3>Updating the flashcards…</h3>
         <div class="bar"><i style="width:${state.progress}%"></i></div>
@@ -322,22 +321,21 @@ function renderFlow() {
 
 /* ========================================================= studio ====== */
 
+// Same grid order as the original NotebookLM studio in both modes; only the
+// flashcards tile changes appearance in improved mode.
+const TILE_ORDER = ["audio", "slides", "video", "mindmap", "reports",
+                    "flashcards", "quiz", "infographic", "table"];
+
 function renderTiles() {
-  // Baseline mode reproduces the original NotebookLM: the flashcards tile is
-  // ordinary and sits in its original spot between Reports and Quiz.
-  const order = state.improved
-    ? ["audio", "slides", "video", "mindmap", "flashcards", "reports", "quiz", "infographic", "table"]
-    : ["audio", "slides", "video", "mindmap", "reports", "flashcards", "quiz", "infographic", "table"];
-  return order.map((type) => {
+  return TILE_ORDER.map((type) => {
     const t = TILES.find((x) => x.type === type);
-    const hero = t.hero && state.improved;
-    const tint = hero ? t.tint : (t.hero ? "#26282B" : t.tint);
+    const accent = t.hero && state.improved;
+    const tint = accent ? t.tint : (t.hero ? "#332720" : t.tint);
     return `
-    <button class="tile ${hero ? "tile-hero" : ""}" style="background:${tint}"
+    <button class="tile ${accent ? "tile-accent" : ""}" style="background:${tint}"
             data-act="tile" data-value="${t.type}">
       <div class="top">${icon(t.icon, "ic-sm")}<span class="chev">${icon("i-right", "ic-sm")}</span></div>
       <div class="label">${esc(t.label)}</div>
-      ${hero && t.sub ? `<div class="sub">${esc(t.sub)}</div>` : ""}
     </button>`;
   }).join("");
 }

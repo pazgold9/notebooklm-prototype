@@ -177,6 +177,25 @@ svg { display:block; flex:none; }
 @keyframes rise { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:none } }
 .gcard.err { border-color:#7A4B49; background:var(--red-fill); }
 .gcard.ok  { border-color:#3E6B4C; background:var(--green-fill); }
+.gcard.accent {
+  border-color:var(--blue); background:#16233C;
+  box-shadow:0 0 0 3px rgba(168,199,250,.12);
+}
+.gcard.accent h3 { color:var(--blue); }
+.gcard.accent p { color:#C9D7EE; }
+.gcard.accent .opt { background:#1D2C48; border-color:#3E5B8C; }
+.gcard.accent .opt:hover { background:#243554; }
+.gcard.accent .opt[aria-pressed="true"] { background:#2F4A78; border-color:var(--blue); }
+.gcard.accent .prow { background:#1D2C48; }
+.gcard.accent .prow:hover { background:#243554; }
+.gcard.accent .prow[aria-pressed="true"] { background:#2F4A78; border-color:var(--blue); }
+.gcard.accent .field { background:#1D2C48; border-color:#3E5B8C; }
+.gcard.accent .scope-tag { background:#2F4A78; }
+.gcard.accent .chipbtn { border-color:#3E5B8C; }
+.gcard.accent .chipbtn:hover { background:#243554; }
+.gcard.accent .chipbtn.on { background:#2F4A78; }
+.gcard.accent .btn:hover { background:#243554; }
+.gcard.accent .btn-fill:disabled { background:#243554; color:#7E8CA3; }
 .gcard h3 { margin:0 0 6px; font-size:16px; font-weight:500; }
 .gcard p  { margin:0 0 16px; color:var(--muted); font-size:13px; line-height:1.55; }
 .scope-tag {
@@ -245,9 +264,9 @@ svg { display:block; flex:none; }
 .tile .top { display:flex; align-items:center; color:var(--muted); }
 .tile .chev { margin-left:auto; }
 .tile .label { font-size:13px; }
-.tile-hero { grid-column:span 2; }
-.tile-hero .label { font-size:14px; font-weight:500; }
-.tile-hero .sub { font-size:11.5px; color:var(--blue); }
+.tile-accent { box-shadow:inset 0 0 0 1px var(--blue); }
+.tile-accent .top { color:var(--blue); }
+.tile-accent .label { font-weight:500; }
 
 .empty { text-align:center; padding:36px 18px; color:var(--subtle); }
 .empty .sparkle { color:var(--blue); margin:0 auto 12px; width:22px; height:22px; }
