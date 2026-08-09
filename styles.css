@@ -194,8 +194,8 @@ svg { display:block; flex:none; }
 .gcard.accent .chipbtn { border-color:#3E5B8C; }
 .gcard.accent .chipbtn:hover { background:#243554; }
 .gcard.accent .chipbtn.on { background:#2F4A78; }
-.gcard.accent .btn:hover { background:#243554; }
-.gcard.accent .btn-fill:disabled { background:#243554; color:#7E8CA3; }
+.gcard.accent .btn:not(.btn-fill):hover { background:#243554; }
+.gcard.accent .btn-fill:disabled { background:#41608F; color:#C9D7EE; }
 .gcard h3 { margin:0 0 6px; font-size:16px; font-weight:500; }
 .gcard p  { margin:0 0 16px; color:var(--muted); font-size:13px; line-height:1.55; }
 .scope-tag {
@@ -230,7 +230,7 @@ svg { display:block; flex:none; }
 .btn:hover { background:var(--panel-2); }
 .btn-fill { background:var(--blue); color:#062E6F; font-weight:500; }
 .btn-fill:hover { background:#BFD6FC; }
-.btn-fill:disabled { background:var(--panel-2); color:#6B6F72; }
+.btn-fill:disabled { background:#3A3F46; color:#9AA0A6; }
 .btn-out { border:1px solid var(--line); }
 .btn-danger { border:1px solid #7A4B49; color:var(--red); }
 .hint { color:var(--red); font-size:12px; margin-top:12px; display:flex; align-items:center; gap:7px; }
@@ -408,14 +408,14 @@ table.data th { color:var(--subtle); font-weight:500; font-size:11.5px; }
 /* ----------------------------------------------------------- facilitator */
 .fac {
   position:fixed; bottom:14px; left:14px; z-index:70; direction:rtl;
-  background:#1A1C1E; border:1px solid var(--line); border-radius:12px;
+  background:#26292E; border:1px solid #4A5058; border-radius:12px;
   font-size:12.5px; box-shadow:0 8px 28px rgba(0,0,0,.5); width:240px;
 }
-.fac summary { padding:9px 13px; cursor:pointer; color:var(--subtle); list-style:none; }
+.fac summary { padding:9px 13px; cursor:pointer; color:#C9CDD2; list-style:none; }
 .fac summary::-webkit-details-marker { display:none; }
 .fac .body { padding:0 13px 13px; display:grid; gap:7px; }
-.fac button { border:1px solid var(--line); border-radius:8px; padding:7px 10px;
-              background:var(--panel-2); color:var(--muted); text-align:right; }
+.fac button { border:1px solid #4A5058; border-radius:8px; padding:7px 10px;
+              background:#31353B; color:#DDE1E6; text-align:right; }
 .fac button:hover { background:var(--panel-3); }
 .fac button.on { border-color:#7A4B49; color:var(--red); }
 .fac .where { color:#7C8085; font-size:11.5px; line-height:1.5; }
