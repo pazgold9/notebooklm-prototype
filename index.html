@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NotebookLM</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-logo" viewBox="0 0 24 24">
+    <path d="M12 3a9 9 0 1 1-9 9 7 7 0 0 1 7-7 5 5 0 0 1 5 5 3 3 0 0 1-3 3 1 1 0 0 1-1-1"/>
+  </symbol>
+  <symbol id="i-analytics" viewBox="0 0 24 24"><path d="M4 18l5-6 4 3 6-8"/><path d="M19 7h-4M19 7v4"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24">
+    <circle cx="17" cy="5" r="2.2"/><circle cx="17" cy="19" r="2.2"/><circle cx="7" cy="12" r="2.2"/>
+    <path d="M8.9 11 15.1 6.2M8.9 13l6.2 4.8"/>
+  </symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2 7.3 7.3M16.7 16.7l2.1 2.1M18.8 5.2 16.7 7.3M7.3 16.7l-2.1 2.1"/>
+  </symbol>
+  <symbol id="i-apps" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <circle cx="6" cy="6" r="1.6"/><circle cx="12" cy="6" r="1.6"/><circle cx="18" cy="6" r="1.6"/>
+    <circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/>
+    <circle cx="6" cy="18" r="1.6"/><circle cx="12" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/>
+  </symbol>
+  <symbol id="i-collapse" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M9 4v16"/></symbol>
+  <symbol id="i-tune" viewBox="0 0 24 24"><path d="M4 7h4M13 7h7M4 12h10M19 12h1M4 17h4M13 17h7"/><circle cx="10.5" cy="7" r="2"/><circle cx="16.5" cy="12" r="2"/><circle cx="10.5" cy="17" r="2"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></symbol>
+  <symbol id="i-add" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9.5 3h5l-.8 6 4.3 3.2V15H6v-2.8L10.3 9z"/><path d="M12 15v6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V5.5A2.5 2.5 0 0 1 7.5 3H16"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6.5 10.5V20H3.5v-9.5zM6.5 10.5 11 3.2a1.9 1.9 0 0 1 2.9 1.9L13 10h5.6a2 2 0 0 1 2 2.4l-1.3 5.9a2 2 0 0 1-2 1.7H6.5z"/></symbol>
+  <symbol id="i-dn" viewBox="0 0 24 24"><g transform="rotate(180 12 12)"><path d="M6.5 10.5V20H3.5v-9.5zM6.5 10.5 11 3.2a1.9 1.9 0 0 1 2.9 1.9L13 10h5.6a2 2 0 0 1 2 2.4l-1.3 5.9a2 2 0 0 1-2 1.7H6.5z"/></g></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3.5 13.7 8 18.5 9.7 13.7 11.4 12 16 10.3 11.4 5.5 9.7 10.3 8z"/><path d="M18.5 15.5 19.3 17.7 21.5 18.5 19.3 19.3 18.5 21.5 17.7 19.3 15.5 18.5 17.7 17.7z"/></symbol>
+  <symbol id="i-audio" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  <symbol id="i-slides" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2.5"/><path d="M9 21h6"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="14" rx="2.5"/><path d="m16 10 5-3.5v11L16 14"/></symbol>
+  <symbol id="i-mindmap" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8.3 7.2 15.5 11M8.3 16.8 15.5 13"/></symbol>
+  <symbol id="i-report" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+  <symbol id="i-cards" viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="13" rx="2.5"/><path d="M7 4h11a3 3 0 0 1 3 3v10"/></symbol>
+  <symbol id="i-quiz" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.4c-.7.3-1 .9-1 1.6M12 17h.01"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 20V11M12 20V4M19 20v-6"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 10h18M3 15h18M9.5 4v16"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M4.5 3.5h10l5 5v12h-15z"/><path d="M8.5 12h7M8.5 16h4"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 1 1-2.5-6"/><path d="M20.5 3.5v5h-5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.8 20h18.4z"/><path d="M12 10v4M12 17.2h.01"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h9.5a6.5 6.5 0 0 1 0 13H10"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M8 8l4-4 4 4"/><path d="M4 15v4a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19v-4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10.5 13.5a4.5 4.5 0 0 0 6.4 0l2.1-2.1a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M13.5 10.5a4.5 4.5 0 0 0-6.4 0L5 12.6a4.5 4.5 0 0 0 6.4 6.4l1-1"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M5 6.5h14M12 6.5V19"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5.5v13l11-6.5z"/></symbol>
+</svg>
+
+<header class="topbar">
+  <svg class="brandmark ic" style="width:26px;height:26px"><use href="#i-logo"/></svg>
+  <div class="nb-title">The Cognitive Architecture of Sleep</div>
+  <button class="tbtn tbtn-light" data-act="toast" data-value="Creating a new notebook is out of scope in this prototype.">
+    <svg class="ic ic-sm"><use href="#i-add"/></svg><span>Create notebook</span>
+  </button>
+  <button class="tbtn" data-act="toast" data-value="Analytics is not part of this prototype."><svg class="ic ic-sm"><use href="#i-analytics"/></svg><span>Analytics</span></button>
+  <button class="tbtn" data-act="toast" data-value="Sharing is not part of this prototype."><svg class="ic ic-sm"><use href="#i-share"/></svg><span>Share</span></button>
+  <button class="tbtn" data-act="toast" data-value="Settings are not part of this prototype."><svg class="ic ic-sm"><use href="#i-settings"/></svg><span>Settings</span></button>
+  <span class="pro">PRO</span>
+  <button class="iconbtn" data-act="toast" data-value="The Google apps menu is not part of this prototype.">
+    <svg class="ic"><use href="#i-apps"/></svg>
+  </button>
+  <div class="avatar">T</div>
+</header>
+
+<main class="workspace">
+  <section class="pane pane-sources" id="paneSources">
+    <div class="pane-head">
+      <span class="pane-title">Sources</span>
+      <button class="iconbtn spacer" data-act="collapse" data-value="sources">
+        <svg class="ic ic-sm"><use href="#i-collapse"/></svg>
+      </button>
+    </div>
+    <div class="pane-body" id="sources"></div>
+  </section>
+
+  <section class="pane pane-chat">
+    <div class="pane-head">
+      <span class="pane-title">Chat</span>
+      <button class="iconbtn spacer" data-act="toast" data-value="Chat settings are not part of this prototype.">
+        <svg class="ic ic-sm"><use href="#i-tune"/></svg>
+      </button>
+      <button class="iconbtn" data-act="toast" data-value="No further chat options in this prototype.">
+        <svg class="ic ic-sm"><use href="#i-more"/></svg>
+      </button>
+    </div>
+    <div class="pane-body chat-scroll" id="chat"></div>
+    <div class="composer-wrap">
+      <div class="composer">
+        <input id="composer" placeholder="Ask a question or create something" autocomplete="off">
+        <span class="srccount" id="srccount">1 source</span>
+        <button class="send" id="send" data-act="send"><svg class="ic ic-sm"><use href="#i-send"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pane pane-studio" id="paneStudio">
+    <div class="pane-head">
+      <span class="pane-title">Studio</span>
+      <button class="iconbtn spacer" data-act="collapse" data-value="studio">
+        <svg class="ic ic-sm"><use href="#i-collapse"/></svg>
+      </button>
+    </div>
+    <div class="pane-body" id="studio"></div>
+  </section>
+</main>
+
+<div id="modal"></div>
+<div class="toasts" id="toasts"></div>
+
+<details class="fac" id="fac">
+  <summary>לוח מנחה</summary>
+  <div class="body">
+    <div class="where" id="facWhere"></div>
+    <button id="facMode">עבור למצב בסיס (לפני השיפור)</button>
+    <button id="facFail">הכשל את העדכון הבא</button>
+    <button id="facReset">אתחל את הבדיקה</button>
+    <button id="facLog">הורד יומן פעולות (CSV)</button>
+  </div>
+</details>
+
+<script src="app.js"></script>
+</body>
+</html>
